@@ -15,11 +15,11 @@ class TestDay01 {
 
     @Test
     fun `multiply the two entries that add to 2020`() {
-        assertEquals(514579, day01part1(testReport))
+        assertEquals(514579, product2(testReport))
     }
 
     @Test
     fun `multiply the three entries that add to 2020`() {
-        assertEquals(241861950, day01part2(testReport))
+        assertEquals(241861950, product3(testReport))
     }
 }
