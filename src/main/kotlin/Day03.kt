@@ -3,36 +3,45 @@ package com.goblindegook.adventofcode2020
 import java.math.BigInteger
 
 fun main() {
-    println(treeCount(3, 1, input))
+    val map = Map(input)
+
+    println(map.treeCount(3, 1))
 
     println(
-        listOf(
-            treeCount(1, 1, input),
-            treeCount(3, 1, input),
-            treeCount(5, 1, input),
-            treeCount(7, 1, input),
-            treeCount(1, 2, input),
+        setOf(
+            map.treeCount(1, 1),
+            map.treeCount(3, 1),
+            map.treeCount(5, 1),
+            map.treeCount(7, 1),
+            map.treeCount(1, 2),
         ).map(Int::toBigInteger).reduce(BigInteger::times)
     )
 }
 
-fun treeCount(right: Int, down: Int, map: String): Int = treeCount(0, 0, 0, right, down, map)
+class Map(private val map: String) {
+    private val width = map.indexOf(NEW_LINE)
+    private val height = map.count { it == NEW_LINE }
 
-private fun treeCount(answer: Int, x: Int, y: Int, right: Int, down: Int, map: String): Int =
-    if (y <= map.height()) treeCount(
-        answer + if (map.featureAt(x, y) == TREE) 1 else 0,
-        x + right,
-        y + down,
-        right,
-        down,
-        map
-    ) else answer
+    fun treeCount(stepRight: Int, stepDown: Int): Int =
+        treeCount(0, 0, 0, stepRight, stepDown)
 
-private const val NEW_LINE = '\n'
-private const val TREE = '#'
-private fun String.width() = indexOf(NEW_LINE)
-private fun String.height() = count { it == NEW_LINE }
-private fun String.featureAt(x: Int, y: Int) = get(y * (width() + 1) + (x % width()))
+    private fun treeCount(answer: Int, x: Int, y: Int, stepRight: Int, stepDown: Int): Int =
+        if (y > height) answer
+        else treeCount(
+            answer + if (map[indexOf(x, y)] == TREE) 1 else 0,
+            x + stepRight,
+            y + stepDown,
+            stepRight,
+            stepDown
+        )
+
+    private fun indexOf(x: Int, y: Int) = y * (width + 1) + (x % width)
+
+    companion object {
+        private const val NEW_LINE = '\n'
+        private const val TREE = '#'
+    }
+}
 
 private val input = """
     ......#..........##......#.####
