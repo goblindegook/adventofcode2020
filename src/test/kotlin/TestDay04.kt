@@ -13,7 +13,7 @@ class TestDay04 {
             byr:1937 iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertTrue(Passport(raw).hasRequiredFields())
+        assertTrue(Passport(raw).isComplete())
     }
 
     @Test
@@ -23,7 +23,7 @@ class TestDay04 {
             hcl:#cfa07d byr:1929
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -33,7 +33,7 @@ class TestDay04 {
             byr:1937 iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -43,7 +43,7 @@ class TestDay04 {
             byr:1937 iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -53,7 +53,7 @@ class TestDay04 {
             byr:1937 iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -63,7 +63,7 @@ class TestDay04 {
             byr:1937 iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -73,7 +73,7 @@ class TestDay04 {
             iyr:2017 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -83,7 +83,7 @@ class TestDay04 {
             byr:1937 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertFalse(Passport(raw).hasRequiredFields())
+        assertFalse(Passport(raw).isComplete())
     }
 
     @Test
@@ -95,7 +95,7 @@ class TestDay04 {
             hgt:179cm
         """.trimIndent()
 
-        assertTrue(Passport(raw).hasRequiredFields())
+        assertTrue(Passport(raw).isComplete())
     }
 
     @Test
@@ -113,7 +113,7 @@ class TestDay04 {
             byr:1937 cid:147 hgt:183cm
         """.trimIndent()
 
-        assertEquals(2, countPassportsWithRequiredFields(raw))
+        assertEquals(2, completePassportCount(raw))
     }
 
     @Test

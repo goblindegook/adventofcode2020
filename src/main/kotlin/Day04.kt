@@ -2,19 +2,19 @@ package com.goblindegook.adventofcode2020
 
 fun main() {
     val input = object {}.javaClass.getResource("/day04-input.txt").readText()
-    println(countPassportsWithRequiredFields(input))
-    println(countPassportsWithValidFields(input))
+    println(completePassportCount(input))
+    println(validPassportCount(input))
 }
 
-fun countPassportsWithRequiredFields(input: String): Int = input
+fun completePassportCount(input: String): Int = input
     .split("\n\n")
-    .count { Passport(it).hasRequiredFields() }
+    .count { Passport(it).isComplete() }
 
-fun countPassportsWithValidFields(input: String): Int = input
+fun validPassportCount(input: String): Int = input
     .split("\n\n")
     .count { Passport(it).isValid() }
 
-data class Passport(private val raw: String) {
+data class Passport(private val passport: String) {
     private val byr = validateIntField("byr") { it in 1920..2002 }
     private val iyr = validateIntField("iyr") { it in 2010..2020 }
     private val eyr = validateIntField("eyr") { it in 2020..2030 }
@@ -29,7 +29,7 @@ data class Passport(private val raw: String) {
     private val ecl = validateTextField("ecl", "(\\w+)") { EYE_COLOURS.contains(it) }
     private val pid = validateTextField("pid", "(\\d+)") { it.length == 9 }
 
-    fun hasRequiredFields(): Boolean = REQUIRED_FIELDS.all(::exists)
+    fun isComplete(): Boolean = REQUIRED_FIELDS.all { passport.contains("${it}:") }
 
     fun isValid(): Boolean = byr && iyr && eyr && hgt && hcl && ecl && pid
 
@@ -39,7 +39,7 @@ data class Passport(private val raw: String) {
         validator: (MatchResult.Destructured) -> Boolean,
     ): Boolean =
         Regex(".*${field}:${pattern}.*", setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL))
-            .matchEntire(raw)
+            .matchEntire(passport)
             ?.destructured
             ?.let(validator)
             ?: false
@@ -49,8 +49,6 @@ data class Passport(private val raw: String) {
 
     private fun validateTextField(field: String, pattern: String, validator: (String) -> Boolean): Boolean =
         validateField(field, pattern) { (value) -> validator(value) }
-
-    private fun exists(field: String) = Regex("${field}:").containsMatchIn(raw)
 
     companion object {
         private val REQUIRED_FIELDS = setOf("hgt", "byr", "hcl", "ecl", "iyr", "eyr", "pid")
