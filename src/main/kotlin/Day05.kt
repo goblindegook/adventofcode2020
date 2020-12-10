@@ -4,7 +4,7 @@ import java.lang.Integer.parseInt
 
 fun main() {
     val input = object {}.javaClass.getResource("/day05-input.txt").readText()
-    val boardingPasses = input.split("\n")
+    val boardingPasses = input.lines()
     println(boardingPasses.map(::seatId).maxOrNull())
     println(findEmptySeat(boardingPasses))
 }
@@ -19,5 +19,4 @@ private fun String.parseBinaryString() = parseInt(this, 2)
 fun findEmptySeat(boardingPasses: List<String>): Int = boardingPasses
     .map(::seatId)
     .sorted()
-    .let { seats -> seats.dropWhile { seats.contains(it + 1) } }
-    .first() + 1
+    .run { first { it + 1 !in this } + 1 }

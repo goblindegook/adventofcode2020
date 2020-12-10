@@ -100,20 +100,24 @@ class TestDay04 {
 
     @Test
     fun `count passports with required fields`() {
-        val raw = """
+        val passports = listOf(
+            """
             ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
             byr:1937 iyr:2017 cid:147 hgt:183cm
-            
+            """,
+            """
             hcl:#ae17e1 iyr:2013
             eyr:2024
             ecl:brn pid:760753108 byr:1931
             hgt:179cm
-            
+            """,
+            """          
             ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
             byr:1937 cid:147 hgt:183cm
-        """.trimIndent()
+            """
+        ).map(String::trimIndent)
 
-        assertEquals(2, completePassportCount(raw))
+        assertEquals(2, completePassportCount(passports))
     }
 
     @Test

@@ -29,14 +29,14 @@ class Map(private val map: String) {
     private fun treeCount(answer: Int, x: Int, y: Int, stepRight: Int, stepDown: Int): Int =
         if (y > height) answer
         else treeCount(
-            answer + if (map[indexOf(x, y)] == TREE) 1 else 0,
+            answer + if (map.get(x, y) == TREE) 1 else 0,
             x + stepRight,
             y + stepDown,
             stepRight,
             stepDown
         )
 
-    private fun indexOf(x: Int, y: Int) = y * (width + 1) + (x % width)
+    private fun String.get(x: Int, y: Int) = get(y * (width + 1) + (x % width))
 
     companion object {
         private const val NEW_LINE = '\n'

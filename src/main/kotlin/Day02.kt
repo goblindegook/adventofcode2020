@@ -2,7 +2,7 @@ package com.goblindegook.adventofcode2020
 
 fun main() {
     val input = object {}.javaClass.getResource("/day02-input.txt").readText()
-    val passwords = input.split("\n")
+    val passwords = input.lines()
     println(passwords.count(::isSledPasswordValid))
     println(passwords.count(::isTobogganPasswordValid))
 }

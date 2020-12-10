@@ -2,17 +2,18 @@ package com.goblindegook.adventofcode2020
 
 fun main() {
     val input = object {}.javaClass.getResource("/day04-input.txt").readText()
-    println(completePassportCount(input))
-    println(validPassportCount(input))
+    val passports = input.split("\n\n")
+    println(completePassportCount(passports))
+    println(validPassportCount(passports))
 }
 
-fun completePassportCount(input: String): Int = input
-    .split("\n\n")
-    .count { Passport(it).isComplete() }
+fun completePassportCount(passports: List<String>): Int = passports
+    .map(::Passport)
+    .count(Passport::isComplete)
 
-fun validPassportCount(input: String): Int = input
-    .split("\n\n")
-    .count { Passport(it).isValid() }
+fun validPassportCount(passports: List<String>): Int = passports
+    .map(::Passport)
+    .count(Passport::isValid)
 
 data class Passport(private val passport: String) {
     private val byr = validateIntField("byr") { it in 1920..2002 }
@@ -29,7 +30,9 @@ data class Passport(private val passport: String) {
     private val ecl = validateTextField("ecl", "(\\w+)") { EYE_COLOURS.contains(it) }
     private val pid = validateTextField("pid", "(\\d+)") { it.length == 9 }
 
-    fun isComplete(): Boolean = REQUIRED_FIELDS.all { passport.contains("${it}:") }
+    fun isComplete(): Boolean =
+        setOf("hgt", "byr", "hcl", "ecl", "iyr", "eyr", "pid")
+            .all { passport.contains("${it}:") }
 
     fun isValid(): Boolean = byr && iyr && eyr && hgt && hcl && ecl && pid
 
@@ -51,7 +54,6 @@ data class Passport(private val passport: String) {
         validateField(field, pattern) { (value) -> validator(value) }
 
     companion object {
-        private val REQUIRED_FIELDS = setOf("hgt", "byr", "hcl", "ecl", "iyr", "eyr", "pid")
         private val EYE_COLOURS = setOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
     }
 }
