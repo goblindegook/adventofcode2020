@@ -17,7 +17,7 @@ class TestDay07 {
         "dotted black bags contain no other bags."
     ])
     fun `rule that a bag cannot contain shiny gold bags`(rule: String) {
-        assertEquals(0, countContainerTypes(rule, "shiny gold"))
+        assertEquals(0, containerTypeCount(rule, "shiny gold"))
     }
 
     @ParameterizedTest
@@ -26,7 +26,7 @@ class TestDay07 {
         "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags."
     ])
     fun `rule that a bag that can contain shiny gold bags`(rule: String) {
-        assertEquals(1, countContainerTypes(rule, "shiny gold"))
+        assertEquals(1, containerTypeCount(rule, "shiny gold"))
     }
 
     @Test
@@ -36,7 +36,7 @@ class TestDay07 {
             bright white bags contain 1 shiny gold bag.
         """.trimIndent()
 
-        assertEquals(2, countContainerTypes(rules, "shiny gold"))
+        assertEquals(2, containerTypeCount(rules, "shiny gold"))
     }
 
     @Test
@@ -53,13 +53,13 @@ class TestDay07 {
             dotted black bags contain no other bags.
         """.trimIndent()
 
-        assertEquals(4, countContainerTypes(rules, "shiny gold"))
+        assertEquals(4, containerTypeCount(rules, "shiny gold"))
     }
 
     @Test
     fun `count inside bags that must be empty`() {
         val rules = "shiny gold bags contain no other bags."
-        assertEquals(0, countBags(rules, "shiny gold"))
+        assertEquals(0, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -68,7 +68,7 @@ class TestDay07 {
             shiny gold bags contain 1 bright white bag.
             bright white bags contain no other bags.
         """.trimIndent()
-        assertEquals(1, countBags(rules, "shiny gold"))
+        assertEquals(1, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -77,7 +77,7 @@ class TestDay07 {
             shiny gold bags contain 2 bright white bags.
             bright white bags contain no other bags.
         """.trimIndent()
-        assertEquals(2, countBags(rules, "shiny gold"))
+        assertEquals(2, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -87,7 +87,7 @@ class TestDay07 {
             bright white bags contain no other bags.
             muted yellow bags contain no other bags.
         """.trimIndent()
-        assertEquals(2, countBags(rules, "shiny gold"))
+        assertEquals(2, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -97,7 +97,7 @@ class TestDay07 {
             muted yellow bags contain 2 bright blue bags.
             bright blue bags contain no other bags.
         """.trimIndent()
-        assertEquals(3, countBags(rules, "shiny gold"))
+        assertEquals(3, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -107,7 +107,7 @@ class TestDay07 {
             muted yellow bags contain 1 bright blue bag.
             bright blue bags contain no other bags.
         """.trimIndent()
-        assertEquals(4, countBags(rules, "shiny gold"))
+        assertEquals(4, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -124,7 +124,7 @@ class TestDay07 {
             dotted black bags contain no other bags.
         """.trimIndent()
 
-        assertEquals(32, countBags(rules, "shiny gold"))
+        assertEquals(32, bagCount(rules, "shiny gold"))
     }
 
     @Test
@@ -139,6 +139,6 @@ class TestDay07 {
             dark violet bags contain no other bags.
         """.trimIndent()
 
-        assertEquals(126, countBags(rules, "shiny gold"))
+        assertEquals(126, bagCount(rules, "shiny gold"))
     }
 }

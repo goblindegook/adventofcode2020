@@ -19,4 +19,4 @@ private fun String.parseBinaryString() = parseInt(this, 2)
 fun findEmptySeat(boardingPasses: List<String>): Int = boardingPasses
     .map(::seatId)
     .sorted()
-    .run { first { it + 1 !in this } + 1 }
+    .run { first { ! contains(it + 1) } } + 1

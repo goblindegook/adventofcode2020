@@ -1,17 +1,17 @@
 package com.goblindegook.adventofcode2020
 
-// Constraints: no body blocks, no regex.
+// Constraints: standard classes only, no body blocks, no regex.
 
 fun main() {
-    val input = object {}.javaClass.getResource("/day07-input.txt").readText()
-    println(countContainerTypes(input, "shiny gold"))
-    println(countBags(input, "shiny gold"))
+    val rules = object {}.javaClass.getResource("/day07-input.txt").readText()
+    println(containerTypeCount(rules, "shiny gold"))
+    println(bagCount(rules, "shiny gold"))
 }
 
-fun countContainerTypes(rules: String, bag: String): Int = rules
+fun containerTypeCount(rules: String, bag: String): Int = rules
     .lines()
-    .map { it.split(" bags contain ").run { get(0) to get(1) } }
-    .run { containers(bag, emptySet()) }
+    .map { rule -> rule.split(" bags contain ").let { it[0] to it[1] } }
+    .containers(bag, emptySet())
     .count()
 
 private fun List<Pair<String, String>>.containers(type: String, previous: Set<String>): Set<String> =
@@ -21,20 +21,20 @@ private fun List<Pair<String, String>>.containers(type: String, previous: Set<St
             else remaining.containers(type, previous + found.map { (container) -> container })
         }
 
-fun countBags(rules: String, bag: String): Int = rules
+fun bagCount(rules: String, bag: String): Int = rules
     .lines()
-    .recursiveCountBags(0, listOf(bag to 1)) - 1
+    .recursiveBagCount(0, listOf(bag to 1)) - 1
 
-private fun List<String>.recursiveCountBags(total: Int, queue: List<Pair<String, Int>>): Int =
+private fun List<String>.recursiveBagCount(total: Int, queue: List<Pair<String, Int>>): Int =
     if (queue.isEmpty()) total
     else queue[0].let { (type, quantity) ->
         find { it.startsWith(type) }.orEmpty()
             .split("bags contain", ",").drop(1)
             .map(::parseContents)
             .let { contents ->
-                recursiveCountBags(
+                recursiveBagCount(
                     total + quantity,
-                    queue.drop(1) + contents.map { it * quantity }
+                    queue.drop(1) + contents.map { it.first to it.second * quantity }
                 )
             }
     }
@@ -42,6 +42,4 @@ private fun List<String>.recursiveCountBags(total: Int, queue: List<Pair<String,
 private fun parseContents(line: String): Pair<String, Int> = line
     .trim()
     .split(" ")
-    .run { "${get(1)} ${get(2)}" to (get(0).toIntOrNull() ?: 0) }
-
-private infix operator fun Pair<String, Int>.times(multiplier: Int) = first to second * multiplier
+    .let { "${it[1]} ${it[2]}" to (it[0].toIntOrNull() ?: 0) }

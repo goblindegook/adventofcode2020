@@ -18,4 +18,4 @@ fun isTobogganPasswordValid(entry: String): Boolean =
     } ?: false
 
 private fun String.parsePasswordPolicy() =
-    Regex("""(\d+)-(\d+)\s(\w):\s(\w+)""").matchEntire(this)?.run { destructured }
+    Regex("""(\d+)-(\d+) (\w): (\w+)""").matchEntire(this)?.destructured
