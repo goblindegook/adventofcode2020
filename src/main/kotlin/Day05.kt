@@ -12,11 +12,9 @@ fun main() {
 fun seatId(boardingPass: String): Int = boardingPass
     .replace(Regex("[FL]"), "0")
     .replace(Regex("[BR]"), "1")
-    .parseBinaryString()
-
-private fun String.parseBinaryString() = parseInt(this, 2)
+    .let { parseInt(it, 2) }
 
 fun findEmptySeat(boardingPasses: List<String>): Int = boardingPasses
     .map(::seatId)
     .sorted()
-    .run { first { ! contains(it + 1) } } + 1
+    .run { first { !contains(it + 1) } } + 1

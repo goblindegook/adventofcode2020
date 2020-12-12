@@ -3,11 +3,8 @@ package com.goblindegook.adventofcode2020
 import java.math.BigInteger
 
 fun main() {
-    val input = object {}.javaClass.getResource("/day03-input.txt").readText()
-    val map = Map(input)
-
+    val map = Map(object {}.javaClass.getResource("/day03-input.txt").readText())
     println(map.treeCount(3, 1))
-
     println(
         setOf(
             map.treeCount(1, 1),

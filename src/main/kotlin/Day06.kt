@@ -6,21 +6,21 @@ fun main() {
     println(sumAll(input))
 }
 
-fun countAny(answers: String): Int = answers
-    .filter(Char::isLetter)
-    .toSet()
-    .count()
-
-fun countAll(answers: String): Int = answers
-    .lines()
-    .run { first().count { answer -> all { answer in it } } }
-
 fun sumAny(answerGroups: String): Int = answerGroups
     .split("\n\n")
     .map(::countAny)
     .sum()
 
+fun countAny(answers: String): Int = answers
+    .filter(Char::isLetter)
+    .toSet()
+    .count()
+
 fun sumAll(answerGroups: String): Int = answerGroups
     .split("\n\n")
     .map(::countAll)
     .sum()
+
+fun countAll(answers: String): Int = answers
+    .lines()
+    .run { first().count { answer -> all { answer in it } } }

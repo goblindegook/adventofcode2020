@@ -1,7 +1,5 @@
 package com.goblindegook.adventofcode2020
 
-// Constraints: standard classes only, no body blocks, no regex.
-
 fun main() {
     val rules = object {}.javaClass.getResource("/day07-input.txt").readText()
     println(containerTypeCount(rules, "shiny gold"))
