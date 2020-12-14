@@ -12,7 +12,7 @@ class TestDay09 {
             4
         """.trimIndent()
 
-        assertEquals(4, findXmasWeakness(data, 2))
+        assertEquals(4.toBigInteger(), findXmasTargetValue(data, 2))
     }
 
     @Test
@@ -24,7 +24,7 @@ class TestDay09 {
             3
         """.trimIndent()
 
-        assertEquals(4, findXmasWeakness(data, 2))
+        assertEquals(4.toBigInteger(), findXmasTargetValue(data, 2))
     }
 
     @Test
@@ -37,7 +37,7 @@ class TestDay09 {
             5
         """.trimIndent()
 
-        assertEquals(5, findXmasWeakness(data, 3))
+        assertEquals(5.toBigInteger(), findXmasTargetValue(data, 3))
     }
 
     @Test
@@ -65,6 +65,34 @@ class TestDay09 {
             576
         """.trimIndent()
 
-        assertEquals(127, findXmasWeakness(data, 5))
+        assertEquals(127.toBigInteger(), findXmasTargetValue(data, 5))
+    }
+
+    @Test
+    fun `find weakness in example (preamble=5)`() {
+        val data = """
+            35
+            20
+            15
+            25
+            47
+            40
+            62
+            55
+            65
+            95
+            102
+            117
+            150
+            182
+            127
+            219
+            299
+            277
+            309
+            576
+        """.trimIndent()
+
+        assertEquals(62.toBigInteger(), findXmasWeakness(data, 5))
     }
 }
