@@ -23,7 +23,7 @@ class Map(private val map: String) {
     fun treeCount(stepRight: Int, stepDown: Int): Int =
         treeCount(0, 0, 0, stepRight, stepDown)
 
-    private fun treeCount(answer: Int, x: Int, y: Int, stepRight: Int, stepDown: Int): Int =
+    private tailrec fun treeCount(answer: Int, x: Int, y: Int, stepRight: Int, stepDown: Int): Int =
         if (y > height) answer
         else treeCount(
             answer + if (map.get(x, y) == TREE) 1 else 0,
