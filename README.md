@@ -17,6 +17,7 @@ explore the limits of the language).
 |   6 | [Day06.kt] | [TestDay06.kt] | Immutability, no assignments, standard classes only, no regex. |
 |   7 | [Day07.kt] | [TestDay07.kt] | Immutability, no assignments, standard classes only, no regex. |
 |   8 | [Day08.kt] | [TestDay08.kt] | Immutability, no assignments, standard classes only, no regex. |
+|   9 | [Day09.kt] | [TestDay09.kt] | Immutability, no assignments, standard classes only.           |
 
 [Day01.kt]: src/main/kotlin/Day01.kt
 [Day02.kt]: src/main/kotlin/Day02.kt
@@ -26,6 +27,7 @@ explore the limits of the language).
 [Day06.kt]: src/main/kotlin/Day06.kt
 [Day07.kt]: src/main/kotlin/Day07.kt
 [Day08.kt]: src/main/kotlin/Day08.kt
+[Day09.kt]: src/main/kotlin/Day09.kt
 
 [TestDay01.kt]: src/test/kotlin/TestDay01.kt
 [TestDay02.kt]: src/test/kotlin/TestDay02.kt
@@ -35,3 +37,4 @@ explore the limits of the language).
 [TestDay06.kt]: src/test/kotlin/TestDay06.kt
 [TestDay07.kt]: src/test/kotlin/TestDay07.kt
 [TestDay08.kt]: src/test/kotlin/TestDay08.kt
+[TestDay09.kt]: src/test/kotlin/TestDay09.kt
