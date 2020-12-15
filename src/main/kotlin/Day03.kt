@@ -3,7 +3,7 @@ package com.goblindegook.adventofcode2020
 import java.math.BigInteger
 
 fun main() {
-    val map = Map(object {}.javaClass.getResource("/day03-input.txt").readText())
+    val map = Slope(object {}.javaClass.getResource("/day03-input.txt").readText())
     println(map.treeCount(3, 1))
     println(
         setOf(
@@ -16,7 +16,7 @@ fun main() {
     )
 }
 
-class Map(private val map: String) {
+class Slope(private val map: String) {
     private val width = map.indexOf(NEW_LINE)
     private val height = map.count { it == NEW_LINE }
 

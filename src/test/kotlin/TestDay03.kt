@@ -11,7 +11,7 @@ class TestDay03 {
             ....
         """.trimIndent()
 
-        assertEquals(0, Map(map).treeCount(3, 1))
+        assertEquals(0, Slope(map).treeCount(3, 1))
     }
 
     @Test
@@ -21,7 +21,7 @@ class TestDay03 {
             ...#
         """.trimIndent()
 
-        assertEquals(1, Map(map).treeCount(3, 1))
+        assertEquals(1, Slope(map).treeCount(3, 1))
     }
 
     @Test
@@ -32,7 +32,7 @@ class TestDay03 {
             ..#
         """.trimIndent()
 
-        assertEquals(2, Map(map).treeCount(1, 1))
+        assertEquals(2, Slope(map).treeCount(1, 1))
     }
 
     @Test
@@ -51,6 +51,6 @@ class TestDay03 {
             .#..#...#.#
         """.trimIndent()
 
-        assertEquals(7, Map(map).treeCount(3, 1))
+        assertEquals(7, Slope(map).treeCount(3, 1))
     }
 }
