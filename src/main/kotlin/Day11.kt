@@ -5,32 +5,36 @@ fun main() {
     println(countTakenSeats(seats))
 }
 
-tailrec fun countTakenSeats(seats: String, previous: String? = null): Int =
-    if (seats == previous) seats.count { it == TAKEN }
-    else countTakenSeats(
-        seats.mapIndexed { index, seat ->
-            when {
-                seat == AVAILABLE && countTaken(seats, index) == 0 -> TAKEN
-                seat == TAKEN && countTaken(seats, index) >= 4 -> AVAILABLE
-                else -> seat
-            }
-        }.joinToString(""),
-        seats
-    )
+fun countTakenSeats(seats: String): Int = countTakenSeats(seats.toCharMap(), emptyMap())
 
 private const val NEW_LINE = '\n'
 private const val TAKEN = '#'
 private const val AVAILABLE = 'L'
 
-private fun countTaken(seats: String, index: Int) =
-    neighbours(index, seats.indexOf(NEW_LINE) + 1)
-        .count { neighbour -> seats.getOrNull(neighbour) == TAKEN }
+private fun String.toCharMap(): Map<Pair<Int, Int>, Char> =
+    foldIndexed(emptyMap()) { index, acc, char -> acc + (coordinatesFrom(index) to char) }
 
-private fun neighbours(index: Int, width: Int) =
-    listOfNotNull(
-        (index - 1).takeIf { it % width != width },
-        index,
-        (index + 1).takeIf { it % width != 0 }
+private fun String.coordinatesFrom(index: Int) = (indexOf(NEW_LINE) + 1).let { index % it to index / it }
+
+private tailrec fun countTakenSeats(seats: Map<Pair<Int, Int>, Char>, previous: Map<Pair<Int, Int>, Char>): Int =
+    if (seats == previous) seats.values.count { it == TAKEN }
+    else countTakenSeats(
+        seats.mapValues { (position, state) ->
+            when {
+                state == AVAILABLE && seats.seatedNeighbours(position) == 0 -> TAKEN
+                state == TAKEN && seats.seatedNeighbours(position) >= 4 -> AVAILABLE
+                else -> state
+            }
+        },
+        seats
     )
-        .flatMap { listOf(it - width, it, it + width) }
-        .filter { it != index }
+
+private fun Map<Pair<Int, Int>, Char>.seatedNeighbours(pos: Pair<Int, Int>) = pos
+    .let { (x, y) ->
+        setOf(
+            x - 1 to y - 1, x - 1 to y, x - 1 to y + 1,
+            x to y - 1, x to y + 1,
+            x + 1 to y - 1, x + 1 to y, x + 1 to y + 1
+        )
+    }
+    .count { get(it) == TAKEN }
