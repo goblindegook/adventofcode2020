@@ -31,7 +31,7 @@ explore the limits of the language).
 [Day08.kt]: src/main/kotlin/Day08.kt
 [Day09.kt]: src/main/kotlin/Day09.kt
 [Day10.kt]: src/main/kotlin/Day10.kt
-[Day11.kt]: src/main/kotlin/Day10.kt
+[Day11.kt]: src/main/kotlin/Day11.kt
 
 [TestDay01.kt]: src/test/kotlin/TestDay01.kt
 [TestDay02.kt]: src/test/kotlin/TestDay02.kt
