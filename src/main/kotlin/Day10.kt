@@ -19,10 +19,9 @@ tailrec fun joltageDiffsMultiplied(adapters: List<Int>, diff1: Int = 1, diff3: I
 
 fun adapterPermutationCount(adapters: List<Int>): BigInteger? = adapters
     .sorted()
-    .fold(mapOf(0 to 1.toBigInteger())) { count, jolts ->
-        count + (jolts to count.filterKeys { it in jolts - 3 until jolts }.values.sumOf { it })
+    .fold(mapOf(0 to 1.toBigInteger())) { counts, jolts ->
+        counts + (jolts to counts.filterKeys { it in jolts - 3 until jolts }.values.sumOf { it })
     }
     .toSortedMap()
     .values
     .last()
-
