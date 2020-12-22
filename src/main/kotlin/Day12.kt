@@ -1,19 +1,23 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.extension.plus
+import com.goblindegook.adventofcode2020.extension.times
+import com.goblindegook.adventofcode2020.extension.toIntOr
+import com.goblindegook.adventofcode2020.input.load
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
 
 fun main() {
-    val instructions = object {}.javaClass.getResource("/day12-input.txt").readText()
+    val instructions = load("/day12-input.txt")
     println(navigateShip(instructions))
     println(navigateShipByWaypoint(instructions))
 }
 
 fun navigateShip(instructions: String): Int = instructions
     .lines()
-    .map { it.substring(0, 1) to (it.substring(1).toIntOrNull() ?: 0) }
+    .map { it.substring(0, 1) to (it.substring(1).toIntOr(0)) }
     .fold(0 to 0) { (distance, degrees), (command, value) ->
         when (command) {
             "S", "E" -> distance + value to degrees
@@ -27,7 +31,7 @@ fun navigateShip(instructions: String): Int = instructions
 
 fun navigateShipByWaypoint(instructions: String): Int = instructions
     .lines()
-    .map { it.substring(0, 1) to (it.substring(1).toIntOrNull() ?: 0) }
+    .map { it.substring(0, 1) to (it.substring(1).toIntOr(0)) }
     .fold((0 to 0) to (10 to -1)) { (ship, waypoint), (command, value) ->
         when (command) {
             "S" -> ship to waypoint + (0 to value)
@@ -47,6 +51,3 @@ private fun factor(deg: Int) = cos(deg.radianValue).toInt() - sin(deg.radianValu
 
 private fun Pair<Int, Int>.rotate(deg: Int) =
     (this * cos(deg.radianValue).toInt()) + ((-second to first) * sin(deg.radianValue).toInt())
-
-private inline operator fun Pair<Int, Int>.plus(pair: Pair<Int, Int>) = first + pair.first to second + pair.second
-private inline operator fun Pair<Int, Int>.times(m: Int) = first * m to second * m

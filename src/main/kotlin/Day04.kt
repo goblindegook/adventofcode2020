@@ -1,8 +1,9 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val input = object {}.javaClass.getResource("/day04-input.txt").readText()
-    val passports = input.split("\n\n")
+    val passports = load("/day04-input.txt").split("\n\n")
     println(completePassportCount(passports))
     println(validPassportCount(passports))
 }

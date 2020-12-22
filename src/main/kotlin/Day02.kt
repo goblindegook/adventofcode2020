@@ -1,8 +1,9 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val input = object {}.javaClass.getResource("/day02-input.txt").readText()
-    val passwords = input.lines()
+    val passwords = load("/day02-input.txt").lines()
     println(passwords.count(::isSledPasswordValid))
     println(passwords.count(::isTobogganPasswordValid))
 }

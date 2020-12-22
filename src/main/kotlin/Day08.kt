@@ -1,14 +1,20 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val program = object {}.javaClass.getResource("/day08-input.txt").readText()
+    val program = load("/day08-input.txt")
     println(runUntilLoop(program))
     println(runProgram(program))
 }
 
-fun runUntilLoop(program: String): Int = program.lines()
-    .map { line -> line.split(" ").let { it[0] to it[1].toInt() } }
+fun runUntilLoop(program: String): Int = program.toInstructionList()
     .runUntilLoop(0, 0, emptyList())
+
+fun runProgram(program: String): Int = program.toInstructionList()
+    .runProgram(0, 0, emptyList())
+
+private fun String.toInstructionList() = lines().map { line -> line.split(" ").let { it[0] to it[1].toInt() } }
 
 private fun List<Pair<String, Int>>.runUntilLoop(acc: Int, cur: Int, trace: List<Int>): Int =
     if (cur in trace) acc
@@ -19,10 +25,6 @@ private fun List<Pair<String, Int>>.runUntilLoop(acc: Int, cur: Int, trace: List
             else -> runUntilLoop(acc, cur + 1, trace + cur)
         }
     }
-
-fun runProgram(program: String): Int = program.lines()
-    .map { line -> line.split(" ").let { it[0] to it[1].toInt() } }
-    .runProgram(0, 0, emptyList())
 
 /**
  * Because we know there's a single bug in the program, we can unconditionally explore the alternative first using

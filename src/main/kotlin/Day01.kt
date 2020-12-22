@@ -1,8 +1,10 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.extension.asIntList
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val input = object {}.javaClass.getResource("/day01-input.txt").readText()
-    val expenseReport = input.lines().map(String::toInt)
+    val expenseReport = load("/day01-input.txt").asIntList()
     println(product2(expenseReport))
     println(product3(expenseReport))
 }

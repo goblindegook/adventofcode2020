@@ -1,7 +1,10 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.extension.toIntOr
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val rules = object {}.javaClass.getResource("/day07-input.txt").readText()
+    val rules = load("/day07-input.txt")
     println(containerTypeCount(rules, "shiny gold"))
     println(bagCount(rules, "shiny gold"))
 }
@@ -40,4 +43,4 @@ private fun List<String>.recursiveBagCount(total: Int, queue: List<Pair<String, 
 private fun parseContents(line: String): Pair<String, Int> = line
     .trim()
     .split(" ")
-    .let { "${it[1]} ${it[2]}" to (it[0].toIntOrNull() ?: 0) }
+    .let { "${it[1]} ${it[2]}" to (it[0].toIntOr(0)) }

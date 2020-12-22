@@ -1,10 +1,11 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.extension.asIntList
+import com.goblindegook.adventofcode2020.input.load
 import java.math.BigInteger
 
 fun main() {
-    val data = object {}.javaClass.getResource("/day10-input.txt").readText()
-    val adapters = data.lines().map(String::toInt)
+    val adapters = load("/day10-input.txt").asIntList()
     println(multiplyJoltageDiffs(adapters))
     println(countPermutations(adapters))
 }

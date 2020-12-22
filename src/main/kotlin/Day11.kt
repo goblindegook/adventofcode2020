@@ -1,12 +1,15 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val seats = object {}.javaClass.getResource("/day11-input.txt").readText()
+    val seats = load("/day11-input.txt")
     println(countSeated(seats))
     println(countSeatedRedux(seats))
 }
 
 fun countSeated(seats: String): Int = countSeated(seats.toRoom(), emptyMap(), 4, ::neighbours)
+
 fun countSeatedRedux(seats: String): Int = countSeated(seats.toRoom(), emptyMap(), 5, ::lineOfSight)
 
 private const val NEW_LINE = '\n'

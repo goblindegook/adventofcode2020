@@ -1,9 +1,10 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
 import java.math.BigInteger
 
 fun main() {
-    val map = Slope(object {}.javaClass.getResource("/day03-input.txt").readText())
+    val map = Slope(load("/day03-input.txt"))
     println(map.treeCount(3, 1))
     println(
         setOf(

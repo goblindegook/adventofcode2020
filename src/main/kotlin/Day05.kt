@@ -1,10 +1,10 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
 import java.lang.Integer.parseInt
 
 fun main() {
-    val input = object {}.javaClass.getResource("/day05-input.txt").readText()
-    val boardingPasses = input.lines()
+    val boardingPasses = load("/day05-input.txt").lines()
     println(boardingPasses.map(::seatId).maxOrNull())
     println(findEmptySeat(boardingPasses))
 }

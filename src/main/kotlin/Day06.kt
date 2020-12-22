@@ -1,7 +1,9 @@
 package com.goblindegook.adventofcode2020
 
+import com.goblindegook.adventofcode2020.input.load
+
 fun main() {
-    val input = object {}.javaClass.getResource("/day06-input.txt").readText()
+    val input = load("/day06-input.txt")
     println(sumAny(input))
     println(sumAll(input))
 }
