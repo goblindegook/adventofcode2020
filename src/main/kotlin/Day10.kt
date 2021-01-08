@@ -2,7 +2,6 @@ package com.goblindegook.adventofcode2020
 
 import com.goblindegook.adventofcode2020.extension.asIntList
 import com.goblindegook.adventofcode2020.input.load
-import java.math.BigInteger
 
 fun main() {
     val adapters = load("/day10-input.txt").asIntList()
@@ -18,11 +17,10 @@ tailrec fun multiplyJoltageDiffs(adapters: List<Int>, diff1: Int = 1, diff3: Int
         else -> diff1 * diff3
     }
 
-fun countPermutations(adapters: List<Int>): BigInteger? = adapters
+fun countPermutations(adapters: List<Int>): Long = adapters
     .sorted()
-    .fold(mapOf(0 to 1.toBigInteger())) { counts, jolts ->
-        counts + (jolts to counts.filterKeys { it in jolts - 3 until jolts }.values.sumOf { it })
+    .fold(mapOf(0 to 1L)) { counts, jolts ->
+        counts + (jolts to counts.filterKeys { it in jolts - 3 until jolts }.values.sum())
     }
-    .toSortedMap()
     .values
     .last()

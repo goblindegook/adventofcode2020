@@ -1,8 +1,7 @@
 package com.goblindegook.adventofcode2020
 
-import com.goblindegook.adventofcode2020.extension.asBigIntegerList
+import com.goblindegook.adventofcode2020.extension.asLongList
 import com.goblindegook.adventofcode2020.input.load
-import java.math.BigInteger
 
 fun main() {
     val data = load("/day09-input.txt")
@@ -10,24 +9,24 @@ fun main() {
     println(findXmasWeakness(data, 25))
 }
 
-fun findXmasTargetValue(data: String, preamble: Int): BigInteger? = data
-    .asBigIntegerList()
+fun findXmasTargetValue(data: String, preamble: Int): Long? = data
+    .asLongList()
     .windowed(preamble + 1)
     .find { it.noneIndexed { index, n -> it.drop(index + 1).any { m -> n + m == it.last() } } }
     ?.last()
 
-fun findXmasWeakness(data: String, preamble: Int): BigInteger? = data
-    .asBigIntegerList()
+fun findXmasWeakness(data: String, preamble: Int): Long? = data
+    .asLongList()
     .let { findXmasTargetValue(data, preamble) to it.mapIndexed { index, _ -> it.drop(index) } }
     .let { (target, snapshots) ->
         snapshots
-            .map { snapshot -> snapshot.takeWhileSum { it < target } }
-            .find { snapshot -> snapshot.sumOf { it } == target }
+            .map { snapshot -> snapshot.takeWhileSum { it < target ?: 0 } }
+            .find { snapshot -> snapshot.sum() == target }
     }
     ?.run { maxOrNull()?.let { minOrNull()?.plus(it) } }
 
 private fun <T> List<T>.noneIndexed(predicate: (Int, T) -> Boolean) =
     withIndex().none { predicate(it.index, it.value) }
 
-private fun List<BigInteger>.takeWhileSum(predicate: (BigInteger) -> Boolean) =
-    withIndex().takeWhile { snapshot -> predicate(subList(0, snapshot.index).sumOf { it }) }.map { it.value }
+private fun List<Long>.takeWhileSum(predicate: (Long) -> Boolean) =
+    withIndex().takeWhile { snapshot -> predicate(subList(0, snapshot.index).sum()) }.map { it.value }

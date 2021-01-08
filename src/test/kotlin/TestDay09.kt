@@ -12,7 +12,7 @@ class TestDay09 {
             4
         """.trimIndent()
 
-        assertEquals(4.toBigInteger(), findXmasTargetValue(data, 2))
+        assertEquals(4L, findXmasTargetValue(data, 2))
     }
 
     @Test
@@ -24,7 +24,7 @@ class TestDay09 {
             3
         """.trimIndent()
 
-        assertEquals(4.toBigInteger(), findXmasTargetValue(data, 2))
+        assertEquals(4L, findXmasTargetValue(data, 2))
     }
 
     @Test
@@ -37,7 +37,7 @@ class TestDay09 {
             5
         """.trimIndent()
 
-        assertEquals(5.toBigInteger(), findXmasTargetValue(data, 3))
+        assertEquals(5L, findXmasTargetValue(data, 3))
     }
 
     @Test
@@ -65,7 +65,7 @@ class TestDay09 {
             576
         """.trimIndent()
 
-        assertEquals(127.toBigInteger(), findXmasTargetValue(data, 5))
+        assertEquals(127L, findXmasTargetValue(data, 5))
     }
 
     @Test
@@ -93,6 +93,6 @@ class TestDay09 {
             576
         """.trimIndent()
 
-        assertEquals(62.toBigInteger(), findXmasWeakness(data, 5))
+        assertEquals(62L, findXmasWeakness(data, 5))
     }
 }

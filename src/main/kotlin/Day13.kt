@@ -15,4 +15,4 @@ fun earliestBus(timestamp: Int, buses: List<Int?>): Pair<Int, Int>? = buses
     .map { it to timeToWait(timestamp, it) }
     .minByOrNull { it.second }
 
-private fun timeToWait(timestamp: Int, bus: Int): Int = ((timestamp / bus) * bus + bus - timestamp).takeIf { it != bus } ?: 0
+private fun timeToWait(timestamp: Int, bus: Int): Int = (bus - timestamp % bus).takeIf { it != bus } ?: 0

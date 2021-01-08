@@ -69,31 +69,31 @@ class TestDay10 {
     @Test
     fun `count 1 permutation of (1)`() {
         val data = listOf(1)
-        assertEquals(1.toBigInteger(), countPermutations(data))
+        assertEquals(1L, countPermutations(data))
     }
 
     @Test
     fun `count 2 permutations of (1, 3)`() {
         val data = listOf(1, 3)
-        assertEquals(2.toBigInteger(), countPermutations(data))
+        assertEquals(2L, countPermutations(data))
     }
 
     @Test
     fun `count 1 permutation of (2, 2)`() {
         val data = listOf(2, 2)
-        assertEquals(1.toBigInteger(), countPermutations(data))
+        assertEquals(1L, countPermutations(data))
     }
 
     @Test
     fun `ignore order and count 2 permutations of (3, 1)`() {
         val data = listOf(1, 3)
-        assertEquals(2.toBigInteger(), countPermutations(data))
+        assertEquals(2L, countPermutations(data))
     }
 
     @Test
     fun `count 8 permutations in the first example`() {
         val data = listOf(16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4)
-        assertEquals(8.toBigInteger(), countPermutations(data))
+        assertEquals(8L, countPermutations(data))
     }
 
     @Test
@@ -131,6 +131,6 @@ class TestDay10 {
             10,
             3
         )
-        assertEquals(19208.toBigInteger(), countPermutations(data))
+        assertEquals(19208L, countPermutations(data))
     }
 }
